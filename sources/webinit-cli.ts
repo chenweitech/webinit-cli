@@ -37,11 +37,12 @@ program.on('exit', () => {
 
 program.parse(process.argv);
 
+
 const tempalte = program.args[0];
 
-const loadNormalTemplate = answer => {
+const loadNormalTemplate = (answer: any) => {
     let spinner1 = ora({text: 'DownLoading..',color: 'yellow'}).start();
-    download(`chenweitech/${answer.tempalte}-template-normal`,`./${tempalte}`,err => {
+    download(`chenweitech/${answer.tempalte}-template-normal`,`./${tempalte}`,(err: any) => {
         if(err) {
             spinner1.fail(`DownLoad Error:${err}`).stop();
         }
@@ -50,6 +51,7 @@ const loadNormalTemplate = answer => {
         generate(answer, tempalte).then(()=>{
             spinner2.succeed(`Complier ${chalk.green('Success')}`).stop();
             ora().stopAndPersist({text: 'Thanks for Using WebInit CLI', symbol: '❤️❤️❤️'});
+            console.log("types")
         });
     })
 }
@@ -62,7 +64,7 @@ console.log(chalk.yellow(figlet.textSync('Webinit-CLI', {
 
 let prompts = new Rx.Subject();
 
-inquirer.prompt(prompts).then(answer=>{
+inquirer.prompt(prompts).then((answer: any)=>{
     if (!answer.done) {return}
     loadNormalTemplate(answer);
 });

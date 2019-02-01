@@ -1,12 +1,15 @@
-const gitName = require('./git-user');
+import {GitLocalConfig} from './git-user';
 
-const isVue = answer => {
+const gitName = new GitLocalConfig().getName();
+
+const isVue = (answer: any) => {
   return answer.tempalte==='vue'? true:false;
 }
-const isReact = answer => {
+const isReact = (answer: any) => {
   return answer.tempalte==='react'? true: false;
 }
-const question = {
+
+export const question = {
   askFrame: {
     type: 'list',
     name: 'tempalte',
@@ -40,9 +43,9 @@ const question = {
   askAuthorName: {
     type: 'input',
     name: 'author',
-    default: `${gitName()}`,
+    default: `${gitName}`,
     message: 'Author name?',
   }
 }
 
-module.exports = question;
+// module.exports = question;
