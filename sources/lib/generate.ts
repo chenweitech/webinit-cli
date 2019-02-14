@@ -1,9 +1,9 @@
-const Handlebars = require('handlebars');
-const Metalsmith = require('metalsmith');
-const path = require('path');
-const rm = require('rimraf').sync;
+import Handlebars = require('handlebars');
+import Metalsmith = require('metalsmith');
+import path = require('path');
+import rm = require('rimraf');
 
-module.exports = function generate (answer: any, tempalte: any) {
+export function generate (answer: any, tempalte: any) {
   return new Promise((resolve, reject) => {
     const src = `./${tempalte}`;
     const metalsmith = Metalsmith(path.join(src, 'tmpl'));
@@ -22,9 +22,9 @@ module.exports = function generate (answer: any, tempalte: any) {
       })
       .build((err:any)=>{
         if (answer.vuex===false) {
-          rm(path.join(src, 'store'))
+          rm.sync(path.join(src, 'store'))
         }
-        rm(path.join(src, 'tmpl'));
+        rm.sync(path.join(src, 'tmpl'));
         if(err) reject(err);
         return resolve();
       })

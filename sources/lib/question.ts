@@ -9,7 +9,7 @@ const isReact = (answer: any) => {
   return answer.tempalte==='react'? true: false;
 }
 
-export const question = {
+export default {
   askFrame: {
     type: 'list',
     name: 'tempalte',
@@ -43,7 +43,7 @@ export const question = {
   askAuthorName: {
     type: 'input',
     name: 'author',
-    default: `${gitName}`,
+    default: gitName,
     message: 'Author name?',
   }
 }
