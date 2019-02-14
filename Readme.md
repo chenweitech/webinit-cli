@@ -1,4 +1,4 @@
-# Webinti-CLI
+# @types/webinit-cli
 
 ## Installation
 ```shell
