@@ -4,10 +4,12 @@ const child_process_1 = require("child_process");
 class GitLocalConfig {
     getName() {
         try {
-            this.name = child_process_1.execSync('git config --get user.name').toString();
+            this.name = child_process_1.execSync('git config --get user.name').toString().replace('\n', '');
         }
-        catch (e) { }
-        return this.name || 'admin';
+        catch (e) {
+            throw e;
+        }
+        return `${this.name}` || 'admin';
     }
 }
 exports.GitLocalConfig = GitLocalConfig;

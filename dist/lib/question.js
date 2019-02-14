@@ -8,7 +8,7 @@ const isVue = (answer) => {
 const isReact = (answer) => {
     return answer.tempalte === 'react' ? true : false;
 };
-exports.question = {
+exports.default = {
     askFrame: {
         type: 'list',
         name: 'tempalte',
@@ -36,7 +36,7 @@ exports.question = {
     askAuthorName: {
         type: 'input',
         name: 'author',
-        default: `${gitName}`,
+        default: gitName,
         message: 'Author name?',
     }
 };

@@ -1,8 +1,10 @@
-const Handlebars = require('handlebars');
-const Metalsmith = require('metalsmith');
-const path = require('path');
-const rm = require('rimraf').sync;
-module.exports = function generate(answer, tempalte) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const Handlebars = require("handlebars");
+const Metalsmith = require("metalsmith");
+const path = require("path");
+const rm = require("rimraf");
+function generate(answer, tempalte) {
     return new Promise((resolve, reject) => {
         const src = `./${tempalte}`;
         const metalsmith = Metalsmith(path.join(src, 'tmpl'));
@@ -21,12 +23,13 @@ module.exports = function generate(answer, tempalte) {
         })
             .build((err) => {
             if (answer.vuex === false) {
-                rm(path.join(src, 'store'));
+                rm.sync(path.join(src, 'store'));
             }
-            rm(path.join(src, 'tmpl'));
+            rm.sync(path.join(src, 'tmpl'));
             if (err)
                 reject(err);
             return resolve();
         });
     });
-};
+}
+exports.generate = generate;

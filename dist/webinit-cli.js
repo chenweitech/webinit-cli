@@ -1,13 +1,15 @@
 #!/usr/bin/env node
-const program = require('commander');
-const chalk = require('chalk');
-const Rx = require('rxjs/Rx');
-const inquirer = require('inquirer');
-const download = require('download-git-repo');
-const ora = require('ora');
-const figlet = require('figlet');
-const question = require('../lib/question');
-const generate = require('../lib/generate');
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const program = require("commander");
+const chalk = require("chalk");
+const Rx = require("rxjs/Rx");
+const inquirer = require("inquirer");
+const download = require("download-git-repo");
+const ora = require("ora");
+const figlet = require("figlet");
+const question = require("./lib/question");
+const generate = require("./lib/generate");
 program
     .version(require('../package').version, '-v, --version')
     .usage('[project-name]')
@@ -15,8 +17,8 @@ program
 program.on('--help', () => {
     console.log(' Examples:');
     console.log();
-    console.log(chalk.gray('    # create a new project with an offical tempalte'));
-    console.log(chalk.yellow('    $ webinit-cli my-project'));
+    console.log(chalk.default.gray('    # create a new project with an offical tempalte'));
+    console.log(chalk.default.yellow('    $ webinit-cli my-project'));
     console.log();
 });
 program.on('exit', () => {
@@ -30,16 +32,15 @@ const loadNormalTemplate = (answer) => {
         if (err) {
             spinner1.fail(`DownLoad Error:${err}`).stop();
         }
-        spinner1.succeed(`DownLoad ${chalk.green('Success')}`).stop();
+        spinner1.succeed(`DownLoad ${chalk.default.green('Success')}`).stop();
         let spinner2 = ora({ text: 'Complier..', color: 'yellow' }).start();
-        generate(answer, tempalte).then(() => {
-            spinner2.succeed(`Complier ${chalk.green('Success')}`).stop();
+        generate.generate(answer, tempalte).then(() => {
+            spinner2.succeed(`Complier ${chalk.default.green('Success')}`).stop();
             ora().stopAndPersist({ text: 'Thanks for Using WebInit CLI', symbol: '❤️❤️❤️' });
-            console.log("types");
         });
     });
 };
-console.log(chalk.yellow(figlet.textSync('Webinit-CLI', {
+console.log(chalk.default.yellow(figlet.textSync('Webinit-CLI', {
     font: 'Ghost',
     horizontalLayout: 'default',
     verticalLayout: 'default'
@@ -51,11 +52,11 @@ inquirer.prompt(prompts).then((answer) => {
     }
     loadNormalTemplate(answer);
 });
-prompts.next(question.askFrame);
-prompts.next(question.askVuex);
-prompts.next(question.askReactRouter);
-prompts.next(question.askRedux);
-prompts.next(question.askAuthorName);
+prompts.next(question.default.askFrame);
+prompts.next(question.default.askVuex);
+prompts.next(question.default.askReactRouter);
+prompts.next(question.default.askRedux);
+prompts.next(question.default.askAuthorName);
 prompts.next({
     type: 'confirm',
     name: 'done',
