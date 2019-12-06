@@ -1,7 +1,7 @@
 {
     "name": "webinit-cli",
-    "version": "0.0.6",
-    "description": "Vue,React,Gulp CLI",
+    "version": "0.0.7",
+    "description": "Vue CLI",
     "bin": {
         "webinit-cli": "./dist/sources/webinit-cli.js"
     },
